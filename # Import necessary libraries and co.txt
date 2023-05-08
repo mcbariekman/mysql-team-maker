@@ -1,0 +1,68 @@
+# Import necessary libraries and connect to the database
+
+# Present the menu options to the user
+print("Welcome to the Employee Management System.")
+print("Please select one of the following options:")
+print("1. View all departments")
+print("2. View all roles")
+print("3. View all employees")
+print("4. Add a department")
+print("5. Add a role")
+print("6. Add an employee")
+print("7. Update an employee role")
+print("8. Update an employee manager")
+print("9. View employees by manager")
+print("10. View employees by department")
+print("11. Delete department")
+print("12. Delete role")
+print("13. Delete employee")
+print("14. View department budget")
+
+# Wait for the user's input
+selected_option = input("Enter your choice: ")
+
+# Depending on the user's input, execute the appropriate action
+if selected_option == "1":
+    # View all departments
+    # Query the database for all departments and print the results in a formatted table
+    departments = query_database("SELECT * FROM departments")
+    print_formatted_table(departments)
+
+else if selected_option == "2":
+    # View all roles
+    # Query the database for all roles, including their titles, IDs, departments, and salaries, and print the results in a formatted table
+    roles = query_database("SELECT roles.title, roles.role_id, departments.department_name, roles.salary FROM roles INNER JOIN departments ON roles.department_id = departments.department_id")
+    print_formatted_table(roles)
+
+else if selected_option == "3":
+    # View all employees
+    # Query the database for all employees and their associated information, including IDs, first and last names, job titles, departments, salaries, and managers, and print the results in a formatted table
+    employees = query_database("SELECT employees.employee_id, employees.first_name, employees.last_name, roles.title, departments.department_name, roles.salary, CONCAT_WS(' ', managers.first_name, managers.last_name) AS manager_name FROM employees INNER JOIN roles ON employees.role_id = roles.role_id INNER JOIN departments ON roles.department_id = departments.department_id LEFT JOIN employees AS managers ON employees.manager_id = managers.employee_id")
+    print_formatted_table(employees)
+
+else if selected_option == "4":
+    # Add a department
+    # Prompt the user to enter the name of the new department and insert it into the database
+    department_name = input("Enter the name of the department: ")
+    insert_department(department_name)
+
+else if selected_option == "5":
+    # Add a role
+    # Prompt the user to enter the name, salary, and department ID for the new role and insert it into the database
+    role_title = input("Enter the title of the role: ")
+    salary = input("Enter the salary for the role: ")
+    department_id = input("Enter the department id for the role: ")
+    insert_role(role_title, salary, department_id)
+
+else if selected_option == "6":
+    # Add an employee
+    # Prompt the user to enter the first name, last name, role ID, and manager ID for the new employee and insert them into the database
+    first_name = input("Enter the employee's first name: ")
+    last_name = input("Enter the employee's last name: ")
+    role_id = input("Enter the employee's role id: ")
+    manager_id = input("Enter the employee's manager id: ")
+    insert_employee(first_name, last_name, role_id, manager_id)
+
+else if selected_option == "7":
+    # Update an employee role
+    # Prompt the user to enter the ID of the employee to

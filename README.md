@@ -19,7 +19,7 @@ SOURCE db/seeds.sql;
 
 ## Usage
 
-To run the application, navigate to the project directory in your terminal and run the command `npm start`.
+> To run the application, navigate to the project directory in your terminal and run the command `npm start`.
 
 You will be presented with a menu of options that allow you to view, add, and update data in the database. Here are the available options:
 
@@ -36,7 +36,7 @@ Selecting an option will execute the corresponding function and display the resu
 
 ## Walkthrough
 
-
+[SQL Employee Tracker](https://youtu.be/GxxAj8kmn3E)
 
 ## License
 
